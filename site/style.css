@@ -1,2 +1,9 @@
-body {
+#header {
+text-align: center;
+margin: auto;
+}
+
+#main {
+text-align: center;
+margin: auto;
 }
