@@ -11,7 +11,7 @@ res.sendFile(__dirname + "/" + "index.html");
 
 app.post("/", encoded, function (req, res) {
  console.log(`name: ${req.body.name}, pass: ${req.body.pass}`);
-res.send("succesfull");
+res.send(`succesfull ${req.body.name} ${req.body.pass}`);
 });
 
 
