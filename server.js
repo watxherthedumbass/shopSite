@@ -14,7 +14,7 @@ console.log("connected to database");
 
 db.serialize(() => {
 db.run('CREATE TABLE IF NOT EXISTS accounts(name, pass)');
-
+console.log("made table");
 db.each('SELECT * FROM accounts', (err, row) => {
 if (err) {
 throw err;
@@ -22,12 +22,24 @@ throw err;
 console.log(row.message);
 });
 });
+db.close((err) => {
+  if (err) {
+    return console.error(err.message);
+  }
+  console.log('Close the database connection.');
+});
 
 app.get('/index.html', function (req, res) {
 res.sendFile(__dirname + "/" + "index.html");
 });
 
 app.post("/", encoded, function (req, res) {
+ let db = new sqlite3.Database('main.db', (err) => {
+if (err) {
+console.log(err.message);
+}
+console.log("connected to database");
+});
  console.log(`name: ${req.body.name}, pass: ${req.body.pass}`);
 res.send(`succesfull ${req.body.name} ${req.body.pass}`);
  db.serialize(() => {
@@ -39,13 +51,14 @@ throw err;
 console.log(row.message);
 });
 });
-});
 db.close((err) => {
   if (err) {
     return console.error(err.message);
   }
   console.log('Close the database connection.');
 });
+});
+
 
 var server = app.listen(8081, function () {
    var host = server.address().address
