@@ -10,7 +10,7 @@ if (err) {
 console.log(err.message);
 }
 console.log("connected to database");
-}
+});
 
 db.close((err) => {
   if (err) {
