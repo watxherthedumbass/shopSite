@@ -12,13 +12,6 @@ console.log(err.message);
 console.log("connected to database");
 });
 
-db.close((err) => {
-  if (err) {
-    return console.error(err.message);
-  }
-  console.log('Close the database connection.');
-});
-
 db.serialize(() => {
 db.run('CREATE TABLE IF NOT EXISTS accounts(name, pass)');
 
@@ -47,7 +40,12 @@ console.log(row.message);
 });
 });
 });
-
+db.close((err) => {
+  if (err) {
+    return console.error(err.message);
+  }
+  console.log('Close the database connection.');
+});
 
 var server = app.listen(8081, function () {
    var host = server.address().address
