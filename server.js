@@ -1,6 +1,6 @@
 const express = require('express');
 const app = express;
-app.use(express.static('shop'))
+app.use(express.static('site'))
 
 app.get('/', function (req, res) {
 res.send("hello world");
